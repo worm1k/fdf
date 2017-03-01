@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/16 19:44:03 by abykov            #+#    #+#             */
-/*   Updated: 2017/01/16 19:44:04 by abykov           ###   ########.fr       */
+/*   Created: 2016/11/21 14:07:28 by abykov            #+#    #+#             */
+/*   Updated: 2016/11/21 14:07:29 by abykov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# define BUFF_SIZE 2
-# include <mlx.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <string.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-typedef struct		s_lst
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	struct s_lst	*next;
-	char			*buf;
-	int				fd;
-}					t_lst;
+	const unsigned char	*p1;
+	const unsigned char	*p2;
 
-#endif
+	p1 = (unsigned char *)s1;
+	p2 = (unsigned char *)s2;
+	if (!n)
+		return (0);
+	while (n && *((char *)s1) == *((char *)s2))
+	{
+		if (*p1 != *p2)
+			return (*p1 - *p2);
+		p1++;
+		p2++;
+		n--;
+	}
+	return (*((unsigned char *)s1) - *((unsigned char *)s2));
+}

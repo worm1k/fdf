@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/16 19:44:03 by abykov            #+#    #+#             */
-/*   Updated: 2017/01/16 19:44:04 by abykov           ###   ########.fr       */
+/*   Created: 2016/11/21 14:07:28 by abykov            #+#    #+#             */
+/*   Updated: 2016/11/21 14:07:29 by abykov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# define BUFF_SIZE 2
-# include <mlx.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <string.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-typedef struct		s_lst
+void					*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	struct s_lst	*next;
-	char			*buf;
-	int				fd;
-}					t_lst;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-#endif
+	d = (unsigned char *)dst;
+	s = (unsigned char *)src;
+	while (n > 0)
+	{
+		*d = *s;
+		d++;
+		s++;
+		n--;
+	}
+	return (dst);
+}

@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/16 19:44:03 by abykov            #+#    #+#             */
-/*   Updated: 2017/01/16 19:44:04 by abykov           ###   ########.fr       */
+/*   Created: 2016/11/22 18:45:10 by abykov            #+#    #+#             */
+/*   Updated: 2016/11/22 18:45:10 by abykov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# define BUFF_SIZE 2
-# include <mlx.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <string.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-typedef struct		s_lst
+char	*ft_strcapitalize(char *s)
 {
-	struct s_lst	*next;
-	char			*buf;
-	int				fd;
-}					t_lst;
+	int	i;
 
-#endif
+	ft_strtolower(s);
+	i = 1;
+	if (ft_islower(s[0]))
+		s[0] -= 32;
+	while (s[i])
+	{
+		if (!ft_isalnum(s[i]) && ft_islower(s[i + 1]))
+			s[i + 1] -= 32;
+		i++;
+	}
+	return (s);
+}

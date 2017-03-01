@@ -16,56 +16,47 @@ CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-NAME = libftprintf.a
+MLX = -lmlx -framework OpenGL -framework AppKit
+
+NAME = a
 
 SRC_PATH = .
-LIB_PATH = ./libft
 INC_PATH = .
 OBJ_PATH = .
-OBJLIB_PATH = ./libft
+LIB_PATH = libft
 
 SRC_NAME =	fdf.c
 
-LIB_NAME = 	ft_strchr.c \
-			ft_strclr.c \
-			ft_strcpy.c \
-			ft_strdup.c \
-			ft_strjoin.c \
-			ft_strncpy.c \
-			ft_strnew.c 
-
-INC_NAME = ft_printf.h
+INC_NAME = fdf.h
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-OBJLIB_NAME = $(LIB_NAME:.c=.o)
 
 SRC = $(addprefix $(SRC_PATH)/, $(SRC_NAME))
-LIB = $(addprefix $(LIB_PATH)/, $(LIB_NAME))
 INC = $(addprefix $(INC_PATH)/, $(INC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-OBJLIB = $(addprefix $(OBJLIB_PATH)/,$(OBJLIB_NAME))
+LIB = libft.a
 
 all: $(NAME)
 	
-$(NAME): $(OBJ) $(OBJLIB)
-	ar rc $(NAME) $(OBJ) $(OBJLIB)
-	ranlib $(NAME)
+$(NAME): libft.a $(OBJ)
+	gcc -o $(NAME) $(OBJ) $(MLX) libft/libft.a
+
+$(LIB):
+	make -C libft/
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) -o $@ -c $<
 
-$(OBJLIB_PATH)/%.o: $(LIB_PATH)/%.c
-	@mkdir $(OBJLIB_PATH) 2> /dev/null || true
-	$(CC) -o $@ -c $<
-
 clean:
+	make -C libft/ clean
 	rm -rf $(OBJ) $(OBJLIB)
 
 fclean: clean
+	rm -rf $(LIB_PATH)/$(LIB)
 	rm -rf $(NAME)
 
 re: fclean all
 	
 norme:
-	@norminette $(SRC) $(LIB) $(INC)
+	@norminette $(SRC) $(INC)

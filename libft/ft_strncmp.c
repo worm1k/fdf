@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/16 19:44:03 by abykov            #+#    #+#             */
-/*   Updated: 2017/01/16 19:44:04 by abykov           ###   ########.fr       */
+/*   Created: 2016/11/22 18:53:42 by abykov            #+#    #+#             */
+/*   Updated: 2016/11/22 18:53:42 by abykov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# define BUFF_SIZE 2
-# include <mlx.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <string.h>
-# include "libft/libft.h"
+#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
-int					get_next_line(const int fd, char **line);
-typedef struct		s_lst
+int			ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	struct s_lst	*next;
-	char			*buf;
-	int				fd;
-}					t_lst;
+	size_t	i;
 
-#endif
+	i = 0;
+	if (n == 0)
+		return (0);
+	if (!*s1 || !*s2)
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	while ((s1[i] || s2[i]) && i < n)
+	{
+		if ((unsigned char)s1[i] != (unsigned char)s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}

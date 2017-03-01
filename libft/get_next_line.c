@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../fdf.h"
 
 static int			lst_delone(t_lst **head, int fd)
 {

@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/16 19:44:03 by abykov            #+#    #+#             */
-/*   Updated: 2017/01/16 19:44:04 by abykov           ###   ########.fr       */
+/*   Created: 2016/11/22 16:44:59 by abykov            #+#    #+#             */
+/*   Updated: 2016/11/22 16:45:00 by abykov           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# define BUFF_SIZE 2
-# include <mlx.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <string.h>
-# include "libft/libft.h"
+#include "libft.h"
 
-int					get_next_line(const int fd, char **line);
-typedef struct		s_lst
+char		*ft_strcat(char *s1, const char *s2)
 {
-	struct s_lst	*next;
-	char			*buf;
-	int				fd;
-}					t_lst;
+	size_t	i;
+	size_t	j;
 
-#endif
+	i = 0;
+	j = 0;
+	while (s1[i])
+	{
+		i++;
+	}
+	while (s2[j])
+	{
+		s1[i] = s2[j];
+		i++;
+		j++;
+	}
+	s1[i] = '\0';
+	return (s1);
+}
