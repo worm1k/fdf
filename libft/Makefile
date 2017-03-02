@@ -24,7 +24,7 @@ $(NAME): $(OBJ)
 clean:
 	rm -rf $(OBJ)
 fclean: clean
-	rm -rf libft.a
+	rm -rf $(NAME)
 
 re: fclean all
 	@echo "Done"

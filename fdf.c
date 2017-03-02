@@ -11,47 +11,76 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
-struct dick
+int 	ft_max(int a, int b)
 {
-	int len;
-	int x[10];
-};
+	return (a > b) ? (a) : (b);
+}
 
-int			**read_data(char *path)
+void dda_line (float x1, float y1, float x2, float y2, void *mlx, void *win)
 {
-	int		fd;
-	int		i;
-	char	*line;
-	int		**res;
+	int		i, L, xstart, ystart, xend, yend;
+	float	dX, dY, x[1000], y[1000];
 
+	xstart = roundf(x1);
+	ystart = roundf(y1);
+	xend = roundf(x2);
+	yend = roundf(y2);
+	L = ft_max(abs(xend-xstart), abs(yend-ystart));
+	dX = (x2-x1) / L;
+	dY = (y2-y1) / L;
 	i = 0;
-	fd = open(path, O_RDONLY);
-	while (get_next_line(fd, &line))
+	x[i] = x1;
+	y[i] = y1;
+	i++;
+	while (i < L)
 	{
-		(line) ? (free(line)) : (0);
-		line = 0;
-		i++;
+	x[i] = x[i-1] + dX;
+	y[i] = y[i-1] + dY;
+	i++;
 	}
-	return (0);
+	x[i] = x2;
+	y[i] = y2;
+	/* Output: -----------------------*/
+	i = 0;
+	while (i <= L)
+	{
+		mlx_pixel_put (mlx, win, roundf(x[i]), roundf(y[i]), 0xffffff);
+	i++;
+	}
+	/* -------------------------------*/
 }
 
 int			main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*win;
-	int		**data;
-	struct dick st;
+	t_data	**data;
 
-	st.len = 20;
-	printf("%d\n", st.len);
-
-	if (argc != 2)
-		return (1);
-//	data = read_data(argv[1]);
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 600, 300, "HUI_PIZDA");
-	mlx_loop(mlx);
+	data = read_data(argv[1]);
+	//mlx = mlx_init();
+	//win = mlx_new_window(mlx, 600, 300, "HUI_PIZDA");
+	//dda_line(10, 10, 500, 15, mlx, win);
+	
+	//mlx_loop(mlx);
 	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

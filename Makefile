@@ -25,7 +25,8 @@ INC_PATH = .
 OBJ_PATH = .
 LIB_PATH = libft
 
-SRC_NAME =	fdf.c
+SRC_NAME =	fdf.c \
+			read_data.c
 
 INC_NAME = fdf.h
 
@@ -38,23 +39,23 @@ LIB = libft.a
 
 all: $(NAME)
 	
-$(NAME): libft.a $(OBJ)
+$(NAME): $(LIB) $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(MLX) libft/libft.a
 
 $(LIB):
-	make -C libft/
+	make -C $(LIB_PATH)/
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) -o $@ -c $<
 
 clean:
-	make -C libft/ clean
-	rm -rf $(OBJ) $(OBJLIB)
+	rm -rf $(OBJ)
+#	make -C $(LIB_PATH)/ clean
 
 fclean: clean
-	rm -rf $(LIB_PATH)/$(LIB)
 	rm -rf $(NAME)
+#	rm -rf $(LIB_PATH)/$(LIB)
 
 re: fclean all
 	
