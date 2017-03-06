@@ -10,102 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
-*  0: invalid number
-* -1: color missing
-* -2: invalid color
-* -3: invalid characters
-**/
-
 #include "fdf.h"
 
-static int			is_space(char *str, int *i)
+static char			**read_char(const char *path)
 {
-	if (str[*i] == '\0')
-		return (1);
-	if (str[*i] == ' ' || str[*i] == '\t')
-		while (str[*i] == ' ' || str[*i] == '\t')
-			(*i)++;
-	else
-		return (-3);
-	return (1);
-}
-
-static int			is_number(char *str, int *i)
-{
-	if (str[*i] == '-')
-		(*i)++;
-	if ('0' <= str[*i] && str[*i] <= '9')
-		while ('0' <= str[*i] && str[*i] <= '9')
-			(*i)++;
-	else
-		return (0);
-	return (1);
-}
-
-static int			is_color(char *str, int *i)
-{
-	if (str[*i] == '0' && str[*i + 1] == 'x')
-	{
-		*i += 2;
-		if (('0' <= str[*i] && str[*i] <= '9')
-		|| ('A' <= str[*i] && str[*i] <= 'F'))
-			while (('0' <= str[*i] && str[*i] <= '9')
-			|| ('A' <= str[*i] && str[*i] <= 'F'))
-				(*i)++;
-		else
-			return (-2);
-	}
-	else
-		return (-1);
-	return (1);
-}
-
-static int			count_nums(char *str)
-{
+	int				fd;
+	int				rows;
+	char			*line;
+	char			**res;
 	int				i;
-	int				res;
-	int				err;
 
+	fd = open(path, O_RDONLY);
+	rows = 0;
+	while (get_next_line(fd, &line) > 0)
+	{
+		(line) ? (free(line)) : (0);
+		line = 0;
+		rows++;
+	}
+	res = (char **)malloc(sizeof(char *) * rows);
+	close(fd);
+	fd = open(path, O_RDONLY);
 	i = 0;
-	res = 0;
-	while (str[i])
+	while (i < rows)
 	{
-		if ((err = is_number(str, &i)) <= 0)
-			return (err);
-		if (str[i] == ',')
-		{
-			i++;
-			if ((err = is_color(str, &i)) <= 0)
-				return (err);
-		}
-		if ((err = is_space(str, &i)) <= 0)
-			return (err);
-		res++;
-	}
-	return (res);
-}
-
-static int			isvalid(char **split)
-{
-	int				num;
-	int				temp;
-	int				i;
-	int				j;
-
-	num = count_nums(split[0]);
-	printf("NUM:[%d]\n", num);
-	i = 1;
-	while (split[i])
-	{
-		temp = count_nums(split[i]);
-		if (num != temp)
-			printf("ROW#[%d] NEEDS [%+d] NUMS\n", i, num - temp);
-		else
-			printf("ROW#[%d] VALID\n", i);
+		get_next_line(fd, &res[i]);
+		// ft_putendl(res[i]);
 		i++;
 	}
-	return (1);
+	return (res);
 }
 
 static char			**read_chars(const char *path)
@@ -134,14 +67,13 @@ t_data				**read_data(const char *path)
 {
 	char			**split;
 	t_data			**res;
+	int				rows;
+	int				cols;
 
-	split = read_chars(path);
+	split = read_char(path);
+	cols = isvalid(split, &rows);
+	printf("[%d]x[%d]\n", rows, cols);
 
-	for(int i = 0; split[i]; i++)
-	{
-		ft_putendl(split[i]);
-	}
-	isvalid(split);
 	return (res);
 }
 

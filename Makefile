@@ -26,7 +26,9 @@ OBJ_PATH = .
 LIB_PATH = libft
 
 SRC_NAME =	fdf.c \
-			read_data.c
+			read_data.c \
+			print_error.c \
+			isvalid.c
 
 INC_NAME = fdf.h
 
@@ -37,9 +39,9 @@ INC = $(addprefix $(INC_PATH)/, $(INC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 LIB = libft.a
 
-all: $(NAME)
+all: $(LIB) $(NAME)
 	
-$(NAME): $(LIB) $(OBJ)
+$(NAME): $(OBJ)
 	gcc -o $(NAME) $(OBJ) $(MLX) libft/libft.a
 
 $(LIB):

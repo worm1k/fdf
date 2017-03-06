@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,35 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
-# define BUFF_SIZE 256
-# include <mlx.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <string.h>
-# include <stdio.h>
-# include "libft/libft.h"
-# include <math.h>
+/**
+*  0: invalid number
+* -1: color missing
+* -2: invalid color
+* -3: invalid characters
+**/
 
-int					get_next_line(const int fd, char **line);
-typedef struct		s_lst
+#include "fdf.h"
+
+void		print_error(int err, int row)
 {
-	struct s_lst	*next;
-	char			*buf;
-	int				fd;
-}					t_lst;
-
-typedef struct		s_data
-{
-	int				color;
-	unsigned int	z;
-}					t_data;
-t_data				**read_data(const char *path);
-void				print_error(int err, int row);
-int					isvalid(char **split, int *rows);
-
-#endif
+	ft_putstr("Line #[");
+	ft_putnbr(row);
+	if (err == 0)
+		ft_putendl("] invalid number");
+	else if (err == -1)
+		ft_putendl("] color is missing");
+	else if (err == -2)
+		ft_putendl("] invalid color");
+	else if (err == -3)
+		ft_putendl("] invalid characters");
+	else if (err == -4)
+		ft_putendl("] wrong number of coordinates");
+	else
+		ft_putendl("] unknown error");
+}
