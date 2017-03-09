@@ -36,6 +36,8 @@ static int			is_space(char *str, int *i)
 
 static int			is_number(char *str, int *i)
 {
+	while (str[*i] == ' ' || str[*i] == '\t')
+		(*i)++;
 	if (str[*i] == '-')
 		(*i)++;
 	if ('0' <= str[*i] && str[*i] <= '9')
@@ -48,6 +50,8 @@ static int			is_number(char *str, int *i)
 
 static int			is_color(char *str, int *i)
 {
+	while (str[*i] == ' ' || str[*i] == '\t')
+		(*i)++;
 	if (str[*i] == '0' && str[*i + 1] == 'x')
 	{
 		*i += 2;
@@ -74,8 +78,6 @@ static int			count_nums(char *str)
 
 	i = 0;
 	res = 0;
-	while (str[i] == ' ' || str[i] == '\t')
-		i++;
 	while (str[i])
 	{
 		if ((err = is_number(str, &i)) <= 0)
@@ -110,8 +112,7 @@ int					isvalid(char **split, int *rows)
 		temp = count_nums(split[i]);
 		if (num != temp)
 		{
-			print_error(-4, i);
-			printf("LINE[%d][%+d]\n", i, num - temp);
+			print_error(-4, i + 1);
 			return (0);
 		}
 		i++;

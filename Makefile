@@ -28,7 +28,9 @@ LIB_PATH = libft
 SRC_NAME =	fdf.c \
 			read_data.c \
 			print_error.c \
-			isvalid.c
+			isvalid.c \
+			fd_atoi.c \
+			print_struct.c
 
 INC_NAME = fdf.h
 
@@ -47,7 +49,7 @@ $(NAME): $(OBJ)
 $(LIB):
 	make -C $(LIB_PATH)/
 
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c  $(INC)
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
 	$(CC) -o $@ -c $<
 
