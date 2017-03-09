@@ -58,7 +58,7 @@ void		wolf(void *mlx, void *win)
 	int w = 300, h = 300;
 	int	bpp, sl, end;
 
-	void *img = mlx_xpm_file_to_image(mlx, "test.xpm", &w, &h);
+	void *img = mlx_xpm_file_to_image(mlx, "..awdawdawdwa/Downloads/gun.xpm.txt", &w, &h);
 	mlx_put_image_to_window(mlx, win, img, 100, 100);
 	printf("[W]:[%d]\n", w);
 	printf("[H]:[%d]\n", h);
@@ -83,28 +83,20 @@ void		idinahuipidor(void *mlx, void *win)
 int			main(int argc, char **argv)
 {
 	t_data	data;
-	int		bpp;
-	int		sl;
-	int		end;
 
-	if (argc == 2)
-		read_data(argv[1]);
+	// if (argc == 2)
+	// 	read_data(argv[1]);
 
+	printf("SUKA\n");
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, 1280, 720, "HUI_PIZDA");
 	data.img = mlx_new_image(data.mlx, 1280, 720);
 	data.str = mlx_get_data_addr(data.img, &data.bits, &data.size, &data.end);
 
-	/*
-	data.img = mlx_new_image (data.mlx, 10, 10);
-	str = mlx_get_data_addr(data.img, &bpp, &sl, &end);
-	printf("[STR]:%s\n", str);
-	printf("[BPP]:%d\n", bpp);
-	printf(" [SL]:%d\n", sl);
-	printf("[END]:%d\n", end);
-*/
+	printf("PIZDA\n");
+	wolf(data.mlx, data.win);
 	//dda_line(10, 10, 100, 50, data.mlx, data.win);
-	//mlx_loop(data.mlx);
+	mlx_loop(data.mlx);
 	return (0);
 }
 

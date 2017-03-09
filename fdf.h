@@ -45,8 +45,10 @@ typedef struct		s_data
 	void			*win;
 	int				rows;
 	int				cols;
-	int				x;
-	int				y;
+	int				win_x;
+	int				win_y;
+	int				x_start;
+	int				y_start;
 	void			*img;
 	char			*str;
 	int				bits;
