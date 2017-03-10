@@ -30,7 +30,9 @@ SRC_NAME =	fdf.c \
 			print_error.c \
 			isvalid.c \
 			fd_atoi.c \
-			print_struct.c
+			print_struct.c \
+			trash.c \
+			draw.c
 
 INC_NAME = fdf.h
 

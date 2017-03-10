@@ -63,7 +63,7 @@ static char			**read_char(const char *path)
 	return (res);
 }
 
-static void			get_row(t_point *point, char *str, int cols)
+static void			get_row(t_point *point, char *str, int cols, int row)
 {
 	int				i;
 
@@ -93,7 +93,7 @@ static t_point		**init_struct(int rows, int cols, char **split)
 	while (i < rows)
 	{
 		res[i] = (t_point *)malloc(sizeof(t_point) * cols);
-		get_row(res[i], split[i], cols);
+		get_row(res[i], split[i], cols, i);
 		i++;
 	}
 	return (res);
@@ -111,7 +111,13 @@ t_data				*read_data(const char *path)
 		exit (0);
 	printf("[%d]x[%d]\n", res->rows, res->cols);
 	res->point = init_struct(res->rows, res->cols, split);
-	print_struct(res);
+	res->step = 800 / (ft_max(res->rows, res->cols) - 1);
+	res->x_0 = 100;
+	res->y_0 = 100;
+	res->x_max = 900;
+	res->y_max = 900;
+	res->win_x = 1600;
+	res->win_y = 1200;
 
 	return (res);
 }

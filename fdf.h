@@ -35,7 +35,9 @@ int					get_next_line(const int fd, char **line);
 typedef struct		s_point
 {
 	int				color;
-	unsigned int	z;
+	unsigned		z;
+	int				x;
+	int				y;
 }					t_point;
 
 typedef struct		s_data
@@ -45,10 +47,13 @@ typedef struct		s_data
 	void			*win;
 	int				rows;
 	int				cols;
+	int				step;
 	int				win_x;
 	int				win_y;
-	int				x_start;
-	int				y_start;
+	int				x_0;
+	int				y_0;
+	int				x_max;
+	int				y_max;
 	void			*img;
 	char			*str;
 	int				bits;
@@ -56,11 +61,16 @@ typedef struct		s_data
 	int				end;
 }					t_data;
 
+int 				ft_max(int a, int b);
 t_data				*read_data(const char *path);
 void				print_error(int err, int row);
 int					isvalid(char **split, int *rows);
+void				dda_line(float x1, float y1, float x2, float y2, t_data *data);
 int					fd_atoi(char **nptr);
 int					fd_htoi(char **nptr);
 void				print_struct(t_data *data);
+void				wolf(void *mlx, void *win);
+void				idinahuipidor(void *mlx, void *win);
+void				draw(t_data *data);
 
 #endif

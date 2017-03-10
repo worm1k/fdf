@@ -18,11 +18,25 @@ int 		ft_max(int a, int b)
 	return (a > b) ? (a) : (b);
 }
 
-void		dda_line (float x1, float y1, float x2, float y2, void *mlx, void *win)
+void		img_pixel_put(t_data *data, int x, int y, int color)
+{
+	size_t		i;
+
+	if (x < 0 || y < 0)
+		return ;
+	i = y * (data->size) + x * 4;
+	data->str[i] = color % 256;
+	data->str[i + 1] = (color / 256) % 256;
+	data->str[i + 2] = (color / 256 / 256) % 256;
+	data->str[i + 3] = color / 256 / 256 / 256;
+}
+
+void		dda_line(float x1, float y1, float x2, float y2, t_data *data)
 {
 	int		i, L, xstart, ystart, xend, yend;
-	float	dX, dY, x[1000], y[1000];
+	float	dX, dY, xi, yi;
 
+	printf("JOPA\n");
 	xstart = roundf(x1);
 	ystart = roundf(y1);
 	xend = roundf(x2);
@@ -31,72 +45,48 @@ void		dda_line (float x1, float y1, float x2, float y2, void *mlx, void *win)
 	dX = (x2-x1) / L;
 	dY = (y2-y1) / L;
 	i = 0;
-	x[i] = x1;
-	y[i] = y1;
+	printf("JOPA2\n");
+	img_pixel_put(data, roundf(x1), roundf(y1), 0xffffff);
+	xi = x1;
+	yi = y1;
 	i++;
+	printf("JOPA3\n");
 	while (i < L)
 	{
-		x[i] = x[i-1] + dX;
-		y[i] = y[i-1] + dY;
+		img_pixel_put(data, roundf(xi + dX), roundf(yi + dY), 0xffffff);
+		xi = xi + dX;
+		yi = yi + dY;
 		i++;
 	}
-	x[i] = x2;
-	y[i] = y2;
-
-	/* Output: -----------------------*/
-	i = 0;
-	while (i <= L)
-	{
-		mlx_pixel_put (mlx, win, roundf(x[i]), roundf(y[i]), 0xffffff);
-		i++;
-	}
-	/* -------------------------------*/
+	img_pixel_put(data, roundf(x2), roundf(y2), 0xffffff);
 }
 
-void		wolf(void *mlx, void *win)
-{
-	int w = 300, h = 300;
-	int	bpp, sl, end;
-
-	void *img = mlx_xpm_file_to_image(mlx, "..awdawdawdwa/Downloads/gun.xpm.txt", &w, &h);
-	mlx_put_image_to_window(mlx, win, img, 100, 100);
-	printf("[W]:[%d]\n", w);
-	printf("[H]:[%d]\n", h);
-	char *str = mlx_get_data_addr(img, &bpp, &sl, &end);
-
-	printf("[STR]:%d\n", ((int *)str)[0]);
-	printf("[BPP]:%d\n", bpp);
-	printf(" [SL]:%d\n", sl);
-	printf("[END]:%d\n", end);
-}
-
-void		idinahuipidor(void *mlx, void *win)
-{
-	mlx_string_put(mlx, win, 100, 100, 0xFF0000, "IDI_NAHUI");
-	mlx_string_put(mlx, win, 115, 120, 0xFFFF00, "P");
-	mlx_string_put(mlx, win, 130, 120, 0x00FF00, "I");
-	mlx_string_put(mlx, win, 145, 120, 0x00FFFF, "D");
-	mlx_string_put(mlx, win, 160, 120, 0x0000FF, "O");
-	mlx_string_put(mlx, win, 175, 120, 0xFF00FF, "R");
-}
 
 int			main(int argc, char **argv)
 {
-	t_data	data;
+	t_data	*data;
 
-	// if (argc == 2)
-	// 	read_data(argv[1]);
+	if (argc == 2)
+		data = read_data(argv[1]);
 
-	printf("SUKA\n");
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, 1280, 720, "HUI_PIZDA");
-	data.img = mlx_new_image(data.mlx, 1280, 720);
-	data.str = mlx_get_data_addr(data.img, &data.bits, &data.size, &data.end);
+	data->mlx = mlx_init();
+	printf("win:[%d]x[%d]\n", data->win_x, data->win_y);
+	printf("img:[%d]x[%d]\n", data->x_max - data->x_0, data->y_max - data->y_0);
+	data->win = mlx_new_window(data->mlx, data->win_x, data->win_y, "HUI_PIZDA");
+	data->img = mlx_new_image(data->mlx, data->x_max - data->x_0, data->y_max - data->y_0);
+	data->str = mlx_get_data_addr(data->img, &data->bits, &data->size, &data->end);
 
-	printf("PIZDA\n");
-	wolf(data.mlx, data.win);
-	//dda_line(10, 10, 100, 50, data.mlx, data.win);
-	mlx_loop(data.mlx);
+	printf("[%d][%d][%d]\n", data->bits, data->size, data->end);
+	/*
+	dda_line(0, 0, 800, 0, &data);
+	dda_line(800, 0, 800, 800, &data);
+	dda_line(800, 800, 0, 800, &data);
+	dda_line(0, 800, 0, 0, &data);
+	*/
+	printf("[%d]\n", data->step);
+	draw(data);
+	mlx_put_image_to_window(data->mlx, data->win, data->img, 100, 100);
+	mlx_loop(data->mlx);
 	return (0);
 }
 
