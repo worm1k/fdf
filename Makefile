@@ -32,7 +32,9 @@ SRC_NAME =	fdf.c \
 			fd_atoi.c \
 			print_struct.c \
 			trash.c \
-			draw.c
+			draw.c \
+			transform.c \
+			rotate.c
 
 INC_NAME = fdf.h
 

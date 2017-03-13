@@ -70,6 +70,8 @@ static void			get_row(t_point *point, char *str, int cols, int row)
 	i = 0;
 	while (i < cols)
 	{
+		point[i].x = (float)i;
+		point[i].y = (float)row;
 		point[i].z = fd_atoi(&str);
 		if (*str == ',')
 		{
@@ -111,13 +113,11 @@ t_data				*read_data(const char *path)
 		exit (0);
 	printf("[%d]x[%d]\n", res->rows, res->cols);
 	res->point = init_struct(res->rows, res->cols, split);
-	res->step = 800 / (ft_max(res->rows, res->cols) - 1);
-	res->x_0 = 100;
-	res->y_0 = 100;
-	res->x_max = 900;
-	res->y_max = 900;
-	res->win_x = 1600;
-	res->win_y = 1200;
+	// res->x_max = res->step * (res->cols - 1);
+	// res->y_max = res->step * (res->rows - 1);
+	res->win_x = 1000;
+	res->win_y = 1000;
+	res->step = 800.0 / (float)(ft_max(res->rows, res->cols) - 1);
 
 	return (res);
 }

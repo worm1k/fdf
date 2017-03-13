@@ -23,7 +23,7 @@ void	print_struct(t_data *data)
 		j = 0;
 		while (j < data->cols)
 		{
-			printf("%d", data->point[i][j].z);
+			printf("%f", data->point[i][j].z);
 			if (data->point[i][j].color != 0xFFFFFF)
 				printf(",%x", data->point[i][j].color);
 			j++;
