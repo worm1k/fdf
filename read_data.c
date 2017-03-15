@@ -63,16 +63,19 @@ static char			**read_char(const char *path)
 	return (res);
 }
 
-static void			get_row(t_point *point, char *str, int cols, int row)
+static void			get_row(t_point *point, char *str, t_data *data, int row)
 {
 	int				i;
 
 	i = 0;
-	while (i < cols)
+	while (i < data->cols)
 	{
-		point[i].x = (float)i;
-		point[i].y = (float)row;
+		point[i].x = (float)(i - (data->cols - 1 ) / 2);
+		point[i].y = (float)(row - (data->rows - 1 ) / 2);
 		point[i].z = fd_atoi(&str);
+		point[i].x0 = point[i].x;
+		point[i].y0 = point[i].y;
+		point[i].z0 = point[i].z;
 		if (*str == ',')
 		{
 			str += 3;
@@ -84,7 +87,7 @@ static void			get_row(t_point *point, char *str, int cols, int row)
 	}
 }
 
-static t_point		**init_struct(int rows, int cols, char **split)
+static t_point		**init_struct(int rows, int cols, char **split, t_data *data)
 {
 	t_point			**res;
 	int				i;
@@ -95,7 +98,7 @@ static t_point		**init_struct(int rows, int cols, char **split)
 	while (i < rows)
 	{
 		res[i] = (t_point *)malloc(sizeof(t_point) * cols);
-		get_row(res[i], split[i], cols, i);
+		get_row(res[i], split[i], data, i);
 		i++;
 	}
 	return (res);
@@ -112,7 +115,7 @@ t_data				*read_data(const char *path)
 	if (res->cols < 1)
 		exit (0);
 	printf("[%d]x[%d]\n", res->rows, res->cols);
-	res->point = init_struct(res->rows, res->cols, split);
+	res->point = init_struct(res->rows, res->cols, split, res);
 	// res->x_max = res->step * (res->cols - 1);
 	// res->y_max = res->step * (res->rows - 1);
 	res->win_x = 1000;

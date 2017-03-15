@@ -12,14 +12,6 @@
 
 #include "fdf.h"
 
-void		redraw(t_data *data)
-{
-	mlx_destroy_image(data->mlx, data->img);
-	data->img = mlx_new_image(data->mlx, data->win_x, data->win_y);
-	data->str = mlx_get_data_addr(data->img, &data->bits, &data->size, &data->end);
-	draw(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-}
 
 void		move_x(t_data *data, float dx)
 {
@@ -96,6 +88,7 @@ void		set_default(t_data *data)
 		{
 			data->point[y][x].x = data->point[y][x].x0;
 			data->point[y][x].y = data->point[y][x].y0;
+			data->point[y][x].z = data->point[y][x].z0;
 			x++;
 		}
 		y++;

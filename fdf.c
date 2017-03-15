@@ -39,13 +39,13 @@ int			select_func(int keycode, t_data *data)
 	else if (keycode == 75)
 		depth(data, 0.9);
 	else if (keycode == 87)
-		rotate_x(data, -0.1);
+		rotate_x(data, -0.05);
 	else if (keycode == 84)
-		rotate_x(data, 0.1);
+		rotate_x(data, 0.05);
 	else if (keycode == 83)
-		rotate_z(data, 0.1);
+		rotate_z(data, 0.05);
 	else if (keycode == 85)
-		rotate_z(data, -0.1);
+		rotate_z(data, -0.05);
 	return (0);
 }
 
@@ -119,7 +119,7 @@ int			main(int argc, char **argv)
 
 	printf("[%d][%d][%d]\n", data->bits, data->size, data->end);
 	printf("[%4.2f]\n", data->step);
-	compute_coords(data);
+	//compute_coords(data);
 	draw(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 

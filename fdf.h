@@ -77,8 +77,9 @@ void				zoom(t_data *data, float scale);
 void				set_default(t_data *data);
 void				move_y(t_data *data, float dy);
 void				move_x(t_data *data, float dx);
-void				rotate_x(t_data *data, double rad);
-void				rotate_z(t_data *data, double rad);
+void				rotate_x(t_data *data, float rad);
+void				rotate_y(t_data *data, float rad);
+void				rotate_z(t_data *data, float rad);
 void				depth(t_data *data, float alpha);
 
 #endif
