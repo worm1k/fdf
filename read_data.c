@@ -83,6 +83,10 @@ static void			get_row(t_point *point, char *str, t_data *data, int row)
 		}
 		else
 			point[i].color = 0xFFFFFF;
+		point[i].blue = point[i].color % 256;
+		point[i].green = point[i].color / 256 % 256;
+		point[i].red = point[i].color / 256 / 256 % 256;
+		point[i].alpha = point[i].color / 256 / 256 / 256;
 		i++;
 	}
 }
@@ -111,16 +115,18 @@ t_data				*read_data(const char *path)
 
 	res = (t_data *)malloc(sizeof(t_data));
 	split = read_char(path);
+	if (split[0] == NULL)
+	{
+		ft_putendl("#Error: empty map");
+		(split) ? (free(split)) :(0);
+		exit(0);
+	}
 	res->cols = isvalid(split, &(res->rows));
-	if (res->cols < 1)
-		exit (0);
 	printf("[%d]x[%d]\n", res->rows, res->cols);
 	res->point = init_struct(res->rows, res->cols, split, res);
-	// res->x_max = res->step * (res->cols - 1);
-	// res->y_max = res->step * (res->rows - 1);
-	res->win_x = 1000;
+	res->win_x = 1200;
 	res->win_y = 1000;
-	res->step = 800.0 / (float)(ft_max(res->rows, res->cols) - 1);
+	res->step = 800.0f / (float)(ft_max(res->rows, res->cols) - 1.0f);
 
 	return (res);
 }

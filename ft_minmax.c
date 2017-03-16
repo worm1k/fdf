@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_error.c                                      :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,29 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
-*  0: invalid number
-* -1: color missing
-* -2: invalid color
-* -3: invalid characters
-**/
-
 #include "fdf.h"
 
-void		print_error(int err, int row)
+int 		ft_max(int a, int b)
 {
-	ft_putstr("Line #[");
-	ft_putnbr(row);
-	if (err == 0)
-		ft_putendl("] invalid number");
-	else if (err == -1)
-		ft_putendl("] color is missing");
-	else if (err == -2)
-		ft_putendl("] invalid color");
-	else if (err == -3)
-		ft_putendl("] invalid characters");
-	else if (err == -4)
-		ft_putendl("] wrong number of coordinates");
-	else
-		ft_putendl("] unknown error");
+	return (a > b) ? (a) : (b);
+}
+
+int 		ft_min(int a, int b)
+{
+	return (a < b) ? (a) : (b);
 }

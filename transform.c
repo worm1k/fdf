@@ -12,7 +12,6 @@
 
 #include "fdf.h"
 
-
 void		move_x(t_data *data, float dx)
 {
 	int		x;

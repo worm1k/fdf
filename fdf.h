@@ -35,6 +35,10 @@ int					get_next_line(const int fd, char **line);
 typedef struct		s_point
 {
 	unsigned		color;
+	unsigned char	red;
+	unsigned char	green;
+	unsigned char	blue;
+	unsigned char	alpha;
 	float			z;
 	float			x;
 	float			y;
@@ -58,13 +62,15 @@ typedef struct		s_data
 	int				bits;
 	int				size;
 	int				end;
+	unsigned		default_color;
+	int				argc_2;
 }					t_data;
 
 int 				ft_max(int a, int b);
+int 				ft_min(int a, int b);
 t_data				*read_data(const char *path);
 void				print_error(int err, int row);
 int					isvalid(char **split, int *rows);
-void				dda_line(float x1, float y1, float x2, float y2, t_data *data);
 int					fd_atoi(char **nptr);
 int					fd_htoi(char **nptr);
 void				print_struct(t_data *data);
@@ -81,5 +87,6 @@ void				rotate_x(t_data *data, float rad);
 void				rotate_y(t_data *data, float rad);
 void				rotate_z(t_data *data, float rad);
 void				depth(t_data *data, float alpha);
+int					read_hex(char *str);
 
 #endif

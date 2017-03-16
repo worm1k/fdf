@@ -16,10 +16,10 @@ void		rotate_z(t_data *data, float rad)
 {
 	int		x;
 	int		y;
-
 	float	temp_x;
 	float	temp_y;
-	printf("ROTZ[%+.1f]\n", rad);
+
+	printf("ROT_Z[%+.2f]\n", rad);
 	y = 0;
 	while (y < data->rows)
 	{
@@ -41,19 +41,20 @@ void		rotate_x(t_data *data, float rad)
 {
 	int		x;
 	int		y;
-
-	float	temp;
+	float	temp_y;
 	float	temp_z;
-	printf("ROTX[%+.1f]\n", rad);
+
+	printf("ROT_X[%+.2f]\n", rad);
 	y = 0;
 	while (y < data->rows)
 	{
 		x = 0;
 		while (x < data->cols)
 		{
-			temp = data->point[y][x].y * cosf(rad) + data->point[y][x].z * sinf(rad);
-			data->point[y][x].z = data->point[y][x].z * cosf(rad) - data->point[y][x].y * sinf(rad);
-			data->point[y][x].y = temp;
+			temp_y = data->point[y][x].y;
+			temp_z = data->point[y][x].z;
+			data->point[y][x].y = temp_y * cosf(rad) + temp_z * sinf(rad);
+			data->point[y][x].z = temp_z * cosf(rad) - temp_y * sinf(rad);
 			x++;
 		}
 		y++;
@@ -63,7 +64,27 @@ void		rotate_x(t_data *data, float rad)
 
 void		rotate_y(t_data *data, float rad)
 {
-	
+	int		x;
+	int		y;
+	float	temp_x;
+	float	temp_z;
+
+	printf("ROT_Y[%+.2f]\n", rad);
+	y = 0;
+	while (y < data->rows)
+	{
+		x = 0;
+		while (x < data->cols)
+		{
+			temp_x = data->point[y][x].x;
+			temp_z = data->point[y][x].z;
+			data->point[y][x].x = temp_x * cosf(rad) + temp_z * sinf(rad);
+			data->point[y][x].z = temp_z * cosf(rad) - temp_x * sinf(rad);
+			x++;
+		}
+		y++;
+	}
+	redraw(data);
 }
 
 void		depth(t_data *data, float alpha)

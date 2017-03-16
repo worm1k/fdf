@@ -12,11 +12,11 @@
 
 #include "fdf.h"
 
-int			fd_atoi(char **nptr)
+int				fd_atoi(char **nptr)
 {
-	int		i;
-	int		res;
-	int		sign;
+	int			i;
+	int			res;
+	int			sign;
 
 	i = 0;
 	res = 0;
@@ -39,7 +39,7 @@ int			fd_atoi(char **nptr)
 	return (sign * res);
 }
 
-static int	tonumber(char c)
+static int		tonumber(char c)
 {
 	if (ft_isdigit(c))
 		return (c - '0');
@@ -50,10 +50,10 @@ static int	tonumber(char c)
 	return (0xDEADBEEF);
 }
 
-int			fd_htoi(char **nptr)
+int				fd_htoi(char **nptr)
 {
-	int		i;
-	int		res;
+	int			i;
+	int			res;
 
 	i = 0;
 	res = 0;
@@ -65,3 +65,48 @@ int			fd_htoi(char **nptr)
 	*nptr += i;
 	return (res);
 }
+
+int				isval_hex(char *str)
+{
+	int			i;
+
+	i = 0;
+	if (str[i] == '0' && (str[i + 1] == 'x' || str[i + 1] == 'X'))
+	{
+		i += 2;
+	}
+	while (str[i])
+	{
+		if (!(('0' <= str[i] && str[i] <= '9')
+		|| ('A' <= str[i] && str[i] <= 'F')
+		|| ('a' <= str[i] && str[i] <= 'f')))
+			return (-1);
+		i++;
+	}
+	return (1);
+}
+
+int				read_hex(char *str)
+{
+	int			err;
+	unsigned	res;
+
+	err = isval_hex(str);
+	if (err < 0)
+	{
+		ft_putendl("#Error: Invalid color parameter. 0xDEADBEEF");
+		exit(0);
+	}
+	str += 2;
+	res = fd_htoi(&str);
+	printf("COLOR:[%#.8x]\n", res);
+	return (res);
+}
+
+
+
+
+
+
+
+

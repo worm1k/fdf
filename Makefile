@@ -27,14 +27,14 @@ LIB_PATH = libft
 
 SRC_NAME =	fdf.c \
 			read_data.c \
-			print_error.c \
+			print.c \
 			isvalid.c \
 			fd_atoi.c \
-			print_struct.c \
 			trash.c \
 			draw.c \
 			transform.c \
-			rotate.c
+			rotate.c \
+			ft_minmax.c
 
 INC_NAME = fdf.h
 
