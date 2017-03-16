@@ -88,5 +88,9 @@ void				rotate_y(t_data *data, float rad);
 void				rotate_z(t_data *data, float rad);
 void				depth(t_data *data, float alpha);
 int					read_hex(char *str);
-
+void				ft_x1x2y1y2(float *var, t_point *p1, t_point *p2, t_data *data);
+void				ft_startend(int *var0, float *var1);
+void				ft_inc(float *var1);
+void				ft_divide(float *var1, t_point *p1, t_point *p2, int L);
+void				ft_somesthing(float *var1, t_point *p1);
 #endif

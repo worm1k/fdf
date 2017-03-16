@@ -34,7 +34,8 @@ SRC_NAME =	fdf.c \
 			draw.c \
 			transform.c \
 			rotate.c \
-			ft_minmax.c
+			ft_minmax.c \
+			norme.c
 
 INC_NAME = fdf.h
 
