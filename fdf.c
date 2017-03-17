@@ -37,17 +37,29 @@ void		select_func_2(int keycode, t_data *data)
 		rotate_y(data, 0.05);
 	else if (keycode == 53)
 		close_fdf(data);
+	else if (keycode == 18)
+		ft_red(data, 20);
+	else if (keycode == 19)
+		ft_green(data, 20);
+	else if (keycode == 20)
+		ft_blue(data, 20);
+	else if (keycode == 12)
+		ft_red(data, -20);
+	else if (keycode == 13)
+		ft_green(data, -20);
+	else if (keycode == 14)
+		ft_blue(data, -20);
 }
 
 int			select_func(int keycode, t_data *data)
 {
-	if (keycode == 126 || keycode == 13)
+	if (keycode == 126)
 		move_y(data, -0.5);
-	else if (keycode == 125 || keycode == 1)
+	else if (keycode == 125)
 		move_y(data, 0.5);
-	else if (keycode == 123 || keycode == 0)
+	else if (keycode == 123)
 		move_x(data, -1);
-	else if (keycode == 124 || keycode == 2)
+	else if (keycode == 124)
 		move_x(data, 1);
 	else if (keycode == 69 || keycode == 24)
 		zoom(data, 1.1);

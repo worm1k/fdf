@@ -94,4 +94,7 @@ void				ft_divide(float *var1, t_point *p1, t_point *p2, int l);
 void				ft_something(float *var1, t_point *p1);
 void				ft_colinit(t_point *point);
 void				ft_countrows(int fd, char **line, int *rows);
+void				ft_red(t_data *data, int step);
+void				ft_green(t_data *data, int step);
+void				ft_blue(t_data *data, int step);
 #endif
