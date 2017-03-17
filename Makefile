@@ -49,7 +49,7 @@ LIB = libft.a
 all: $(LIB) $(NAME)
 	
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(OBJ) $(MLX) libft/libft.a
+	gcc -o $(NAME) $(OBJ) $(MLX) $(LIB_PATH)/$(LIB)
 
 $(LIB):
 	make -C $(LIB_PATH)/
