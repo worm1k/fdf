@@ -29,14 +29,14 @@ void		wolf(void *mlx, void *win)
 	printf("[END]:%d\n", end);
 }
 
-void		idinahuipidor(void *mlx, void *win)
+void		youaregreat(void *mlx, void *win)
 {
-	mlx_string_put(mlx, win, 100, 100, 0xFF0000, "IDI_NAHUI");
-	mlx_string_put(mlx, win, 115, 120, 0xFFFF00, "P");
-	mlx_string_put(mlx, win, 130, 120, 0x00FF00, "I");
-	mlx_string_put(mlx, win, 145, 120, 0x00FFFF, "D");
-	mlx_string_put(mlx, win, 160, 120, 0x0000FF, "O");
-	mlx_string_put(mlx, win, 175, 120, 0xFF00FF, "R");
+	mlx_string_put(mlx, win, 100, 100, 0xFF0000, "YOU_ARE");
+	mlx_string_put(mlx, win, 115, 120, 0xFFFF00, "G");
+	mlx_string_put(mlx, win, 130, 120, 0x00FF00, "R");
+	mlx_string_put(mlx, win, 145, 120, 0x00FFFF, "E");
+	mlx_string_put(mlx, win, 160, 120, 0x0000FF, "A");
+	mlx_string_put(mlx, win, 175, 120, 0xFF00FF, "T");
 }
 
 void	print_struct(t_data *data)
