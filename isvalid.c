@@ -10,13 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
-*  0: invalid number
-* -1: color missing
-* -2: invalid color
-* -3: invalid characters
-**/
-
 #include "fdf.h"
 
 static int			is_space(char *str, int *i)
@@ -28,7 +21,6 @@ static int			is_space(char *str, int *i)
 			(*i)++;
 	else
 	{
-		printf("I:[%d][%c]\n", *i, str[*i]);
 		return (-3);
 	}
 	return (1);
@@ -45,7 +37,6 @@ static int			is_number(char *str, int *i)
 			(*i)++;
 	else
 	{
-		printf("SUKA\n");
 		return (0);
 	}
 	return (1);
@@ -105,27 +96,17 @@ int					isvalid(char **split, int *rows)
 	int				i;
 
 	if ((num = count_nums(split[0])) <= 0)
-	{
 		print_error(num, 1);
-		return (0);
-	}
 	i = 1;
 	while (split[i])
 	{
 		temp = count_nums(split[i]);
 		if (temp <= 0)
-		{
 			print_error(temp, i + 1);
-			return (0);
-		}
 		if (num != temp)
-		{
 			print_error(-4, i + 1);
-			return (0);
-		}
 		i++;
 	}
 	*rows = i;
 	return (num);
 }
-

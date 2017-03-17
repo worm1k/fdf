@@ -18,7 +18,7 @@ FLAGS = -Wall -Wextra -Werror
 
 MLX = -lmlx -framework OpenGL -framework AppKit
 
-NAME = a
+NAME = fdf
 
 SRC_PATH = .
 INC_PATH = .
@@ -30,12 +30,12 @@ SRC_NAME =	fdf.c \
 			print.c \
 			isvalid.c \
 			fd_atoi.c \
-			trash.c \
 			draw.c \
 			transform.c \
 			rotate.c \
 			ft_minmax.c \
-			norme.c
+			draw_norme.c \
+			read_norm.c
 
 INC_NAME = fdf.h
 

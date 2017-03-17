@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minmax.c                                        :+:      :+:    :+:   */
+/*   read_norm.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abykov <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,31 @@
 
 #include "fdf.h"
 
-int			ft_max(int a, int b)
+void	ft_colinit(t_point *point)
 {
-	return (a > b) ? (a) : (b);
+	point->blue = point->color % 256;
+	point->green = point->color / 256 % 256;
+	point->red = point->color / 256 / 256 % 256;
+	point->alpha = point->color / 256 / 256 / 256;
 }
 
-int			ft_min(int a, int b)
+void	ft_countrows(int fd, char **line, int *rows)
 {
-	return (a < b) ? (a) : (b);
+	*rows = 0;
+	if (fd < 0)
+	{
+		ft_putendl("#Error: File does not exist");
+		exit(0);
+	}
+	while (get_next_line(fd, line) > 0)
+	{
+		(*line) ? (free(*line)) : (0);
+		*line = 0;
+		(*rows)++;
+	}
+	if (*rows == 0)
+	{
+		ft_putendl("#Error: Empty map");
+		exit(0);
+	}
 }

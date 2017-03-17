@@ -72,9 +72,9 @@ int				isval_hex(char *str)
 
 	i = 0;
 	if (str[i] == '0' && (str[i + 1] == 'x' || str[i + 1] == 'X'))
-	{
 		i += 2;
-	}
+	if (str[i] == '\0')
+		return (-1);
 	while (str[i])
 	{
 		if (!(('0' <= str[i] && str[i] <= '9')
@@ -99,14 +99,5 @@ int				read_hex(char *str)
 	}
 	str += 2;
 	res = fd_htoi(&str);
-	printf("COLOR:[%#.8x]\n", res);
 	return (res);
 }
-
-
-
-
-
-
-
-

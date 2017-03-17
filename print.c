@@ -10,14 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/**
-*  0: invalid number
-* -1: color missing
-* -2: invalid color
-* -3: invalid characters
-* -4: coord missing
-**/
-
 #include "fdf.h"
 
 void		print_error(int err, int row)
@@ -36,26 +28,5 @@ void		print_error(int err, int row)
 		ft_putendl("] wrong number of coordinates");
 	else
 		ft_putendl("] unknown error");
-}
-
-void	print_struct(t_data *data)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < data->rows)
-	{
-		j = 0;
-		while (j < data->cols)
-		{
-			printf("%f", data->point[i][j].z);
-			if (data->point[i][j].color != 0xFFFFFF)
-				printf(",%x", data->point[i][j].color);
-			j++;
-			printf("  ");
-		}
-		printf("\n");
-		i++;
-	}
+	exit(0);
 }

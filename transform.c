@@ -17,7 +17,6 @@ void		move_x(t_data *data, float dx)
 	int		x;
 	int		y;
 
-	printf("X[%+2.1f]\n", dx);
 	y = 0;
 	while (y < data->rows)
 	{
@@ -37,7 +36,6 @@ void		move_y(t_data *data, float dy)
 	int		x;
 	int		y;
 
-	printf("Y[%+2.1f]\n", dy);
 	y = 0;
 	while (y < data->rows)
 	{
@@ -57,7 +55,6 @@ void		zoom(t_data *data, float scale)
 	int				x;
 	int				y;
 
-	printf("SCALE[%2.1f]\n", scale);
 	y = 0;
 	while (y < data->rows)
 	{
@@ -66,6 +63,7 @@ void		zoom(t_data *data, float scale)
 		{
 			data->point[y][x].x *= scale;
 			data->point[y][x].y *= scale;
+			data->point[y][x].z *= scale;
 			x++;
 		}
 		y++;
@@ -78,7 +76,6 @@ void		set_default(t_data *data)
 	int				x;
 	int				y;
 
-	printf("DEFAULT\n");
 	y = 0;
 	while (y < data->rows)
 	{
@@ -94,7 +91,3 @@ void		set_default(t_data *data)
 	}
 	redraw(data);
 }
-
-
-
-

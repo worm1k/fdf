@@ -12,7 +12,13 @@
 
 #include "fdf.h"
 
-void		close_fdf(t_data *data)
+static void	ft_usage(void)
+{
+	ft_putendl("usage: ./fdf source_file [0xAA00FF]");
+	exit(0);
+}
+
+static void	close_fdf(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->img);
 	mlx_destroy_window(data->mlx, data->win);
@@ -35,17 +41,17 @@ void		select_func_2(int keycode, t_data *data)
 
 int			select_func(int keycode, t_data *data)
 {
-	if (keycode == 126)
+	if (keycode == 126 || keycode == 13)
 		move_y(data, -0.5);
-	else if (keycode == 125)
+	else if (keycode == 125 || keycode == 1)
 		move_y(data, 0.5);
-	else if (keycode == 123)
+	else if (keycode == 123 || keycode == 0)
 		move_x(data, -1);
-	else if (keycode == 124)
+	else if (keycode == 124 || keycode == 2)
 		move_x(data, 1);
-	else if (keycode == 69)
+	else if (keycode == 69 || keycode == 24)
 		zoom(data, 1.1);
-	else if (keycode == 78)
+	else if (keycode == 78 || keycode == 27)
 		zoom(data, 10.0 / 11.0);
 	else if (keycode == 82)
 		set_default(data);
@@ -66,8 +72,7 @@ int			main(int argc, char **argv)
 {
 	t_data	*data;
 
-	if (argc == 2 || argc == 3)
-		data = read_data(argv[1]);
+	data = (t_data *)malloc(sizeof(t_data));
 	data->argc_2 = 0;
 	if (argc == 3)
 	{
@@ -76,36 +81,17 @@ int			main(int argc, char **argv)
 	}
 	else
 		data->default_color = 0xFFFFFF;
+	if (argc == 2 || argc == 3)
+		data = read_data(argv[1], data);
+	else
+		ft_usage();
 	data->mlx = mlx_init();
-	printf("win:[%d]x[%d]\n", data->win_x, data->win_y);
-	printf("img:[%d]x[%d]\n", data->win_x, data->win_y);
-	data->win = mlx_new_window(data->mlx, data->win_x, data->win_y, "HUI_PIZDA");
+	data->win = mlx_new_window(data->mlx, data->win_x, data->win_y, "ft_fdf");
 	data->img = mlx_new_image(data->mlx, data->win_x, data->win_y);
-	data->str = mlx_get_data_addr(data->img, &data->bits, &data->size, &data->end);
-	printf("[%d][%d][%d]\n", data->bits, data->size, data->end);
-	printf("[%4.2f]\n", data->step);
+	data->str = mlx_get_data_addr(data->img, &data->b, &data->size, &data->end);
 	draw(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
 	mlx_hook(data->win, 2, 5, select_func, data);
 	mlx_loop(data->mlx);
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

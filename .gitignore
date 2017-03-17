@@ -1,3 +1,4 @@
 *.o
 minilibx_macos
 a
+._*
