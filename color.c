@@ -25,8 +25,7 @@ void		ft_red(t_data *data, int step)
 		while (x < data->cols)
 		{
 			p = &data->point[y][x];
-			if (0 <= (int)p->red + step && (int)p->red + step <= 255)
-				p->red += step;
+			p->red += step;
 			p->color = 0;
 			p->color += p->alpha * 256 * 256 * 256;
 			p->color += p->red * 256 * 256;
@@ -52,8 +51,7 @@ void		ft_green(t_data *data, int step)
 		while (x < data->cols)
 		{
 			p = &data->point[y][x];
-			if (0 <= (int)p->green + step && (int)p->green + step <= 255)
-				p->green += step;
+			p->green += step;
 			p->color = 0;
 			p->color += p->alpha * 256 * 256 * 256;
 			p->color += p->red * 256 * 256;
@@ -79,8 +77,7 @@ void		ft_blue(t_data *data, int step)
 		while (x < data->cols)
 		{
 			p = &data->point[y][x];
-			if (0 <= (int)p->blue + step && (int)p->blue + step <= 255)
-				p->blue += step;
+			p->blue += step;
 			p->color = 0;
 			p->color += p->alpha * 256 * 256 * 256;
 			p->color += p->red * 256 * 256;

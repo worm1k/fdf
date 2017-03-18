@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-.PHONY: all clean fclean re norme
+.PHONY: all clean fclean re
 
 CC = gcc
 
@@ -50,7 +50,7 @@ LIB = libft.a
 all: $(LIB) $(NAME)
 	
 $(NAME): $(OBJ)
-	gcc -o $(NAME) $(OBJ) $(MLX) $(LIB_PATH)/$(LIB)
+	gcc -o $(NAME) $(FLAGS) $(OBJ) $(MLX) $(LIB_PATH)/$(LIB)
 
 $(LIB):
 	make -C $(LIB_PATH)/
@@ -61,13 +61,11 @@ $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c  $(INC)
 
 clean:
 	rm -rf $(OBJ)
-#	make -C $(LIB_PATH)/ clean
+	make -C $(LIB_PATH)/ clean
 
 fclean: clean
 	rm -rf $(NAME)
-#	rm -rf $(LIB_PATH)/$(LIB)
+	rm -rf $(LIB_PATH)/$(LIB)
 
 re: fclean all
 	
-norme:
-	@norminette $(SRC) $(INC)

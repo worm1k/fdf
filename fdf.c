@@ -58,9 +58,9 @@ int			select_func(int keycode, t_data *data)
 	else if (keycode == 125)
 		move_y(data, 0.5);
 	else if (keycode == 123)
-		move_x(data, -1);
+		move_x(data, -20);
 	else if (keycode == 124)
-		move_x(data, 1);
+		move_x(data, 20);
 	else if (keycode == 69 || keycode == 24)
 		zoom(data, 1.1);
 	else if (keycode == 78 || keycode == 27)
